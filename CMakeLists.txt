@@ -54,6 +54,7 @@ if(USE_CONAN)
       sdl/2.0.16
       freetype/2.11.1
       icu/69.1
+      zlib/1.2.11
     GENERATORS cmake_find_package
   )
 
