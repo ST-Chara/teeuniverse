@@ -72,6 +72,7 @@ if(USE_HARFBUZZ)
   find_package(harfbuzz REQUIRED)
 endif()
 find_package(ICU REQUIRED COMPONENTS uc i18n)
+find_package(ZLIB)
 
 ########################################################################
 # BUILD_TYPE, PLATFORM
@@ -126,7 +127,6 @@ set(TU_EXECNAME_SERVER teeuniverse_srv)
 
 include_directories("${PROJECT_SOURCE_DIR}/src")
 include_directories("${PROJECT_SOURCE_DIR}/src/external")
-include_directories("${PROJECT_SOURCE_DIR}/src/external/zlib")
 include_directories("${PROJECT_SOURCE_DIR}/src/external/minizip")
 
 if(ICU_FOUND)
@@ -162,6 +162,7 @@ if(USE_HARFBUZZ)
 else()
   show_dependency_status("Harfbuzz" "(disabled)" "used by: client, editor")
 endif()
+show_dependency_status("ZLib" "${ZLIB_FOUND}" "required by: server, client, editor, tools")
 
 if(USE_HARFBUZZ AND NOT(harfbuzz_FOUND))
   message(STATUS " ! Warning: Without Harfbuzz, the text rendering")
@@ -208,7 +209,6 @@ endif()
 
 # Sources
 file(GLOB teeuniverse_shared_src
-  "${PROJECT_SOURCE_DIR}/src/external/zlib/*.c"
   "${PROJECT_SOURCE_DIR}/src/external/minizip/ioapi.c"
   "${PROJECT_SOURCE_DIR}/src/external/minizip/miniunz.c"
   "${PROJECT_SOURCE_DIR}/src/external/minizip/minizip.c"
@@ -234,6 +234,7 @@ endif()
 # Build
 add_library(teeuniverse_shared ${teeuniverse_shared_src})
 target_link_libraries (teeuniverse_shared PUBLIC
+  ZLIB::ZLIB
   ICU::i18n
   ICU::uc
 )
