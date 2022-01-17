@@ -454,3 +454,29 @@ make_test(archivefile)
 make_test(assetsmanager)
 
 message(STATUS "******************************")
+
+########################################################################
+# PACKAGING
+########################################################################
+
+if(DEV)
+  # Don't generate CPack targets.
+elseif(CMAKE_VERSION VERSION_LESS 3.6 OR CMAKE_VERSION VERSION_EQUAL 3.6)
+  message(WARNING "Cannot create CPack targets, CMake version too old. Use CMake 3.6 or newer.")
+else()
+  set(EXTRA_ARGS DESTINATION ${CPACK_PACKAGE_FILE_NAME} COMPONENT portable EXCLUDE_FROM_ALL)
+  install(TARGETS ${CPACK_TARGETS} ${EXTRA_ARGS})
+  install(DIRECTORY ${CPACK_DIRS} ${EXTRA_ARGS})
+  install(FILES ${CPACK_FILES} ${EXTRA_ARGS})
+endif()
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+  set(TARGET_BITS "32")
+else()
+  set(TARGET_BITS "64")
+endif()
+
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+set(CPACK_GENERATOR ZIP)
+
+include(CPack)
