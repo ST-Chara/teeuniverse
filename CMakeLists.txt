@@ -434,6 +434,7 @@ make_assets(infclass)
 make_assets(openfng)
 make_assets(ninslash)
 make_assets(sport)
+make_assets(mmotee)
 
 message(STATUS " * tools ready for compilation")
 
