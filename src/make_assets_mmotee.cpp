@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
 			CSubPath SubPath;
 			
 			CAsset_ZoneType* pAsset = pKernel->AssetsManager()->NewAsset_Hard<CAsset_ZoneType>(&AssetPath, PackageId);
-			pAsset->SetName("MMOTee区域");
+			pAsset->SetName("icBonus");
 			pAsset->SetImagePath(ImageZonesBonusPath);
 			
 			SubPath = CAsset_ZoneType::SubPath_Index(pAsset->AddIndex());
@@ -261,6 +261,23 @@ int main(int argc, char* argv[])
 			pAsset->SetIndexDescription(SubPath, "离开太空");
 			pAsset->SetIndexBorderIndex(SubPath, 20);
 			pAsset->SetIndexBorderColor(SubPath, vec4(255.0f, 164.0f/255.0f, 9.0f, 218.0f));
+		}
+		{
+			CAssetPath AssetPath;
+			CSubPath SubPath;
+			
+			CAsset_ZoneType* pAsset = pKernel->AssetsManager()->NewAsset_Hard<CAsset_ZoneType>(&AssetPath, PackageId);
+			pAsset->SetName("chMap");
+			pAsset->SetImagePath(ImageZonesTeleportationPath);
+
+			SubPath = CAsset_ZoneType::SubPath_Index(pAsset->AddIndex());
+			pAsset->SetIndexTitle(SubPath, "无效果");
+
+			SubPath = CAsset_ZoneType::SubPath_Index(pAsset->AddIndex());
+			pAsset->SetIndexTitle(SubPath, "传送点");
+			pAsset->SetIndexDescription(SubPath, "传送到其他地图");
+			pAsset->SetIndexBorderIndex(SubPath, 1);
+			pAsset->SetIndexBorderColor(SubPath, vec4(11.0f/255.0f, 173.0f/255.0f, 0.0f, 1.0f));
 		}
 		//EntityType, No Register Spawn
 		{
